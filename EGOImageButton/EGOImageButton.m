@@ -65,8 +65,8 @@
 		[self setImage:anImage forState:UIControlStateNormal];
 		
 		// Notify the delegate even when loaded from cache
-		if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:)]) {
-			[self.delegate imageViewLoadedImage:self];
+		if([self.delegate respondsToSelector:@selector(imageButtonLoadedImage:)]) {
+			[self.delegate imageButtonLoadedImage:self];
 		}
 	} else {
 		[self setImage:self.placeholderImage forState:UIControlStateNormal];
