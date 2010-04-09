@@ -63,6 +63,11 @@
 	
 	if(anImage) {
 		[self setImage:anImage forState:UIControlStateNormal];
+		
+		// Notify the delegate even when loaded from cache
+		if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:)]) {
+			[self.delegate imageViewLoadedImage:self];
+		}
 	} else {
 		[self setImage:self.placeholderImage forState:UIControlStateNormal];
 	}
