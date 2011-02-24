@@ -89,6 +89,7 @@
 	self.response = nil;
 	self.delegate = nil;
 	[_connection release];
+	[_responseData release];
 	[_imageURL release];
 	[super dealloc];
 }
