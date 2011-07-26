@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @protocol EGOImageLoaderObserver;
 @interface EGOImageLoader : NSObject/*<NSURLConnectionDelegate>*/ {
