@@ -41,6 +41,7 @@
 - (void)loadImageForURL:(NSURL*)aURL observer:(id<EGOImageLoaderObserver>)observer;
 - (UIImage*)imageForURL:(NSURL*)aURL shouldLoadWithObserver:(id<EGOImageLoaderObserver>)observer;
 - (BOOL)hasLoadedImageURL:(NSURL*)aURL;
+- (void)preCacheImage:(UIImage*)image forURL:(NSURL*)aURL;
 
 - (void)cancelLoadForURL:(NSURL*)aURL;
 

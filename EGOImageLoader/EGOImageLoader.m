@@ -129,6 +129,16 @@ inline static NSString* keyForURL(NSURL* url) {
 	return [[EGOCache currentCache] hasCacheForKey:keyForURL(aURL)];
 }
 
+- (void)preCacheImage:(UIImage*)image forURL:(NSURL*)aURL {
+    if (image && aURL) {
+        EGOCache *cache = [EGOCache currentCache];
+        NSString *key = keyForURL(aURL);
+        if (![cache imageForKey:key]) {
+            [cache setImage:image forKey:key];
+        }
+    }
+}
+
 - (void)removeObserver:(id<EGOImageLoaderObserver>)observer {
 	[[NSNotificationCenter defaultCenter] removeObserver:observer name:nil object:self];
 }
