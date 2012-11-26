@@ -33,6 +33,7 @@
 	NSURL* imageURL;
 	UIImage* placeholderImage;
 	id<EGOImageViewDelegate> delegate;
+    BOOL unloaded;
 }
 
 - (id)initWithPlaceholderImage:(UIImage*)anImage; // delegate:nil

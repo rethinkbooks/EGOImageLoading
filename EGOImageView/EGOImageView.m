@@ -38,8 +38,19 @@
 	if((self = [super initWithImage:anImage])) {
 		self.placeholderImage = anImage;
 		self.delegate = aDelegate;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loadIfNeeded)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(unload:)
+                                                     name:UIApplicationDidReceiveMemoryWarningNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(unload:)
+                                                     name:UIApplicationDidEnterBackgroundNotification
+                                                   object:nil];
 	}
-	
 	return self;
 }
 
@@ -57,9 +68,11 @@
 	} else {
 		imageURL = [aURL retain];
 	}
+    [self loadImage];
+}
 
-	[[EGOImageLoader sharedImageLoader] removeObserver:self];
-	UIImage* anImage = [[EGOImageLoader sharedImageLoader] imageForURL:aURL shouldLoadWithObserver:self];
+- (void)loadImage {
+	UIImage* anImage = [[EGOImageLoader sharedImageLoader] imageForURL:self.imageURL shouldLoadWithObserver:self];
 	
 	if(anImage) {
 		self.image = anImage;
@@ -101,9 +114,30 @@
 	}
 }
 
+- (void)unload:(NSNotification *)notification {
+    if (!self.window || [notification.name isEqualToString:UIApplicationDidEnterBackgroundNotification]) {
+        [[EGOImageLoader sharedImageLoader] removeObserver:self forURL:self.imageURL];
+        self.image = nil;
+        unloaded = YES;
+    }
+}
+
+- (void)loadIfNeeded {
+    if (unloaded) {
+        unloaded = NO;
+        [self loadImage];
+    }
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow {
+    if (newWindow) {
+        [self loadIfNeeded];
+    }
+}
+
 #pragma mark -
 - (void)dealloc {
-	[[EGOImageLoader sharedImageLoader] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 	self.imageURL = nil;
 	self.placeholderImage = nil;
     [super dealloc];
