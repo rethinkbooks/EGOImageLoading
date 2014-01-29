@@ -31,7 +31,7 @@
 static EGOImageLoader* __imageLoader;
 
 inline static NSString* keyForURL(NSURL* url) {
-	return [NSString stringWithFormat:@"EGOImageLoader-%u", [[url description] hash]];
+	return [NSString stringWithFormat:@"EGOImageLoader-%u", (unsigned int) [[url description] hash]];
 }
 
 #define kImageNotificationLoaded(s) [@"kEGOImageLoaderNotificationLoaded-" stringByAppendingString:keyForURL(s)]
