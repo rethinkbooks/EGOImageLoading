@@ -78,8 +78,8 @@
 		self.image = anImage;
 		
 		// Notify the delegate even when loaded from cache
-		if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:)]) {
-			[self.delegate imageViewLoadedImage:self];
+		if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:fromCache:)]) {
+			[self.delegate imageViewLoadedImage:self fromCache:YES];
 		}
 	} else {
 		self.image = self.placeholderImage;
@@ -101,8 +101,8 @@
 	self.image = anImage;
 	[self setNeedsDisplay];
 	
-	if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:)]) {
-		[self.delegate imageViewLoadedImage:self];
+	if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:fromCache:)]) {
+		[self.delegate imageViewLoadedImage:self fromCache:NO];
 	}	
 }
 
