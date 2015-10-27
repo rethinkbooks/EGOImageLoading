@@ -76,14 +76,14 @@
 	
 	if(anImage) {
 		self.image = anImage;
-		
-		// Notify the delegate even when loaded from cache
-		if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:fromCache:)]) {
-			[self.delegate imageViewLoadedImage:self fromCache:YES];
-		}
 	} else {
 		self.image = self.placeholderImage;
-	}
+    }
+    
+    // Notify the delegate even when loaded from cache
+    if([self.delegate respondsToSelector:@selector(imageViewLoadedImage:fromCache:)]) {
+        [self.delegate imageViewLoadedImage:self fromCache:YES];
+    }
 }
 
 #pragma mark -
