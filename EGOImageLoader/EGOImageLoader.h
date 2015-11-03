@@ -25,6 +25,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EGOCache.h"
 
 @protocol EGOImageLoaderObserver;
 @interface EGOImageLoader : NSObject/*<NSURLConnectionDelegate>*/ {
@@ -36,6 +37,8 @@
 }
 
 + (EGOImageLoader*)sharedImageLoader;
++ (NSString*)keyForURL:(NSURL*)aURL;
++ (NSString*)cachedFilePathForURL:(NSURL*)aURL;
 
 - (BOOL)isLoadingImageURL:(NSURL*)aURL;
 - (void)loadImageForURL:(NSURL*)aURL observer:(id<EGOImageLoaderObserver>)observer;

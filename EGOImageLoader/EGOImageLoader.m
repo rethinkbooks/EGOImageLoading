@@ -26,7 +26,6 @@
 
 #import "EGOImageLoader.h"
 #import "EGOImageLoadConnection.h"
-#import "EGOCache.h"
 
 static EGOImageLoader* __imageLoader;
 
@@ -48,6 +47,14 @@ inline static NSString* keyForURL(NSURL* url) {
 	}
 	
 	return __imageLoader;
+}
+
++ (NSString*)keyForURL:(NSURL*)aURL {
+    return keyForURL(aURL);
+}
+
++ (NSString*)cachedFilePathForURL:(NSURL*)aURL {
+    return [EGOCache cachePathForKey:keyForURL(aURL)];
 }
 
 - (id)init {
