@@ -41,9 +41,12 @@
 
 - (void)cancelImageLoad;
 
+- (void)setShouldUnloadWhenAppEntersBackground:(BOOL)shouldUnload;
+
 @property(nonatomic,retain) NSURL* imageURL;
 @property(nonatomic,retain) UIImage* placeholderImage;
 @property(nonatomic,assign) id<EGOImageViewDelegate> delegate;
+@property(nonatomic) BOOL unloadOnAppEnterBackground;
 @end
 
 @protocol EGOImageViewDelegate<NSObject>

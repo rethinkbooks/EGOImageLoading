@@ -46,12 +46,23 @@
                                                  selector:@selector(unload:)
                                                      name:UIApplicationDidReceiveMemoryWarningNotification
                                                    object:nil];
+        
+	}
+	return self;
+}
+
+- (void)setShouldUnloadWhenAppEntersBackground:(BOOL)shouldUnload {
+    if (shouldUnload) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(unload:)
                                                      name:UIApplicationDidEnterBackgroundNotification
                                                    object:nil];
-	}
-	return self;
+    }
+    else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:UIApplicationDidReceiveMemoryWarningNotification
+                                                      object:nil];
+    }
 }
 
 - (void)setImageURL:(NSURL *)aURL {
